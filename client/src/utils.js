@@ -2,9 +2,11 @@ import { keyframes } from "styled-components";
 
 export const fadeIn = keyframes`
   from {
+    visibility: hidden;
     opacity: 0;
   }
   to {
+    visibility: visible;
     opacity: 1;
   }
 `;

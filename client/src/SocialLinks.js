@@ -3,16 +3,24 @@ import styled from "styled-components";
 function SocialLinks() {
   return (
     <SocialLinksWrapper>
-      <a href="https://github.com/omarelaoufi">
+      <a rel="noreferrer" target="_blank" href="https://github.com/omarelaoufi">
         <Image target="_blank" src="github.png" />
       </a>
       <br />
-      <a href="https://twitter.com/omarelaoufi">
+      <a
+        rel="noreferrer"
+        target="_blank"
+        href="https://twitter.com/omarelaoufi"
+      >
         <Image target="_blank" src="twitter.png" />
       </a>
       <br />
-      <a href="https://facebook.com/omar.elaoufi">
-        <Image target="_blank" src="fb.png" />
+      <a
+        rel="noreferrer"
+        target="_blank"
+        href="https://facebook.com/omar.elaoufi"
+      >
+        <Image src="fb.png" />
       </a>
     </SocialLinksWrapper>
   );

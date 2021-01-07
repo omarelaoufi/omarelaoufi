@@ -1,51 +1,48 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+// import { twinkle, writeCharacter } from "./utils";
 
-function Text({ text = "", mainText, textDone, setTextDone }) {
+function Text({ text = "", currentText, textDone, setTextDone }) {
   const [receivedText, setReceivedText] = useState(text);
   const [textIndex, setTextIndex] = useState(0);
   const [visibleText, setVisibleText] = useState([]);
-  const [visibleIndex, setVisibleIndex] = useState(true);
+  const [visibleCursor, setVisibleCursor] = useState(true);
 
   useEffect(() => {
+    let writingTimeout;
+
     if (text !== receivedText) {
       setReceivedText(text);
       setTextIndex(0);
       setVisibleText([]);
-      setVisibleIndex(true);
+      setVisibleCursor(false);
     } else {
-      if (textIndex <= text.length) {
-        setTimeout(() => {
+      if (textIndex < text.length) {
+        writingTimeout = setTimeout(() => {
           setVisibleText((v) => [...v.slice(0, -1)]);
           setVisibleText((v) => [...v, text[textIndex], "▓"]);
           setTextIndex((t) => t + 1);
         }, 30);
       } else {
         setTextDone(true);
-        if (mainText || (!mainText && visibleIndex)) {
-          if (visibleIndex) {
-            setTimeout(() => {
+        if (currentText || (!currentText && visibleCursor)) {
+          if (visibleCursor) {
+            writingTimeout = setTimeout(() => {
               setVisibleText((v) => [...v.slice(0, -1)]);
-              setVisibleIndex(false);
+              setVisibleCursor(false);
             }, 500);
           } else {
-            setTimeout(() => {
+            writingTimeout = setTimeout(() => {
               setVisibleText((v) => [...v, "▓"]);
-              setVisibleIndex(true);
+              setVisibleCursor(true);
             }, 500);
           }
         }
       }
     }
-  }, [
-    text,
-    receivedText,
-    textIndex,
-    textDone,
-    visibleIndex,
-    mainText,
-    setTextDone,
-  ]);
+
+    return () => clearTimeout(writingTimeout);
+  }, [textIndex, text, receivedText, setTextDone, currentText, visibleCursor]);
 
   return (
     <MainText>{visibleText.map((s) => (s === "\\" ? <br /> : s))}</MainText>

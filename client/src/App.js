@@ -32,6 +32,7 @@ function App() {
               clicked={buttonClicked === 0}
               onClick={() => {
                 setButtonClicked(0);
+                setCurrentText(2);
               }}
             >
               💻 show me your powers
@@ -69,7 +70,7 @@ function App() {
       {selectedLanguage !== null && (
         <LanguageText
           language={selectedLanguage}
-          currentText={selectedLanguage !== null}
+          currentText={currentText === 2}
           textDone={languageTextDone}
           setTextDone={setLanguageTextDone}
         />
