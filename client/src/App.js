@@ -23,7 +23,7 @@ function App() {
         currentText={currentText === 0}
         textDone={textDone}
         setTextDone={setTextDone}
-        text="Hello friend.\\My name is Omar El Aoufi.\I am the full-stack developer you need."
+        text="HELLO.FRIEND.\\My name is Omar El Aoufi.\I am the full-stack developer you need."
       />
       {textDone && (
         <Buttons>

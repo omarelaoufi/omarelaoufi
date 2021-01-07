@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-// import { twinkle, writeCharacter } from "./utils";
 
 function Text({ text = "", currentText, textDone, setTextDone }) {
   const [receivedText, setReceivedText] = useState(text);
@@ -15,7 +14,7 @@ function Text({ text = "", currentText, textDone, setTextDone }) {
       setReceivedText(text);
       setTextIndex(0);
       setVisibleText([]);
-      setVisibleCursor(false);
+      setVisibleCursor(true);
     } else {
       if (textIndex < text.length) {
         writingTimeout = setTimeout(() => {
