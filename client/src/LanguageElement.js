@@ -14,7 +14,7 @@ function LanguageElement({ order, name, setSelectedLanguage }) {
 
 const Image = styled.img`
   position: absolute;
-  width: 70px;
+  width: 60px;
   opacity: 0;
   visibility: hidden;
   animation: 1s ${fadeIn} linear ${({ order }) => order * 1000}ms forwards,

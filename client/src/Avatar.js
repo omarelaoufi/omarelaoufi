@@ -15,7 +15,7 @@ function Avatar() {
 }
 
 const AvatarWrapper = styled.div`
-  position: absolute;
+  position: fixed;
   text-align: center;
   right: 2vw;
   bottom: 0;

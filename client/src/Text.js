@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-function Text({ text = "", currentText, textDone, setTextDone }) {
+function Text({
+  speed = 30,
+  text = "",
+  content = [],
+  currentText,
+  textDone,
+  setTextDone,
+}) {
   const [receivedText, setReceivedText] = useState(text);
   const [textIndex, setTextIndex] = useState(0);
   const [visibleText, setVisibleText] = useState([]);
@@ -21,7 +28,7 @@ function Text({ text = "", currentText, textDone, setTextDone }) {
           setVisibleText((v) => [...v.slice(0, -1)]);
           setVisibleText((v) => [...v, text[textIndex], "▓"]);
           setTextIndex((t) => t + 1);
-        }, 30);
+        }, speed);
       } else {
         setTextDone(true);
         if (currentText || (!currentText && visibleCursor)) {
@@ -41,10 +48,29 @@ function Text({ text = "", currentText, textDone, setTextDone }) {
     }
 
     return () => clearTimeout(writingTimeout);
-  }, [textIndex, text, receivedText, setTextDone, currentText, visibleCursor]);
+  }, [
+    speed,
+    textIndex,
+    text,
+    receivedText,
+    setTextDone,
+    currentText,
+    visibleCursor,
+  ]);
 
   return (
-    <MainText>{visibleText.map((s) => (s === "\\" ? <br /> : s))}</MainText>
+    <MainText>
+      {visibleText.map((s) => {
+        switch (s) {
+          case "\\":
+            return <br />;
+          case "^":
+            return content;
+          default:
+            return s;
+        }
+      })}
+    </MainText>
   );
 }
 
